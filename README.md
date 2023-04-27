@@ -33,28 +33,41 @@ Install
 
 ```
 git clone https://github.com/dlccyes/imgur-migrate
+sh install.sh
+```
+
+See available commands
+
+```
+imgur_migrate -h
 ```
 
 Run it against the current directory
 
 ```
-python3 imgur_migrate.py
+imgur_migrate
 ```
 
 Or run it against a specific directory
 
 ```
-python3 imgur_migrate.py <path/to/your/directory>
+imgur_migrate <path/to/your/directory>
 ```
 
 Or run it against a specific file inside a directory
 
 ```
-python3 imgur_migrate.py <path/to/your/directory> <filename>
+imgur_migrate <path/to/your/directory> <filename>
 ```
 
 ## Limitations
 
-I create this simple tool for my own needs, so it isn't featureful.
+I create this simple tool for my own needs, so it isn't very featureful.
 
-It will only search for markdown files, and only for Imgur links starting with `https://i.imgur.com/)` e.g. `https://i.imgur.com/123456.png`, and it will only replace it with wiki links if the Imgur link is in `![]()` or `![text]()`. Meaning, if you write HTML-style embedded images in your markdown file, they won't be replaced.
+### Only works for markdown-style image links in markdow files
+
+It will only search for markdown files, and only for Imgur links starting with `https://i.imgur.com/)` e.g. `https://i.imgur.com/123456.png` that are in `![]()` or `![text]()`. Meaning, if you have HTML-style embedded images in your markdown file, they won't be replaced.
+
+### Does not escape codeblock
+
+If your Imgur link is in codeblock or inline code, it will still be replaced.

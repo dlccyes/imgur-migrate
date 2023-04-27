@@ -86,11 +86,15 @@ def file_imgur_migrate(working_dir: str, file_name: str) -> None:
     print("Done!")
     
 def print_helper_info():
-    print(
-        "Usage:\n\
-        python3 imgur_migrate.py\n\
-        python3 imgur_migrate.py <directory>\n\
-        python3 imgur_migrate.py <directory> <file_name>")
+    if getattr(sys, 'frozen', False): # is a binary
+        command = "imgur_migrate"
+    else: # is a python file
+        command = "python3 imgur_migrate.py"
+    helper_info = f"Usage:\n\
+        {command}\n\
+        {command} <directory>\n\
+        {command} <directory> <file_name>"
+    print(helper_info)
 
 def main():
     if len(sys.argv) == 1:

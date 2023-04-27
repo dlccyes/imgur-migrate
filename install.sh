@@ -1,0 +1,1 @@
+sudo ln -sf $(pwd)/dist/imgur_migrate/imgur_migrate /usr/local/bin/imgur-migrate
