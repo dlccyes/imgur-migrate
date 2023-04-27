@@ -1,8 +1,12 @@
 # Imgur Migrate
 
-Find all Imgur links in the markdown files under your directory, download them, and replace your Imgur links with wikilinks to local images.
+According to Imgur's recent announcement, some images will be deleted from their platform after May 15, 2023. 
+
+To avoid losing your images, you can use this tool to replace all Imgur links in your Markdown files with local images.
 
 ## What it does
+
+This tool will find all Imgur links in the markdown files under your directory, download them, and replace your Imgur links with interal links to local images.
 
 Suppose you have 1 Imgur lank in `README.md` and 2 in `docs/System Design.md`:
 
