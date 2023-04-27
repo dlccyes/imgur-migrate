@@ -49,7 +49,7 @@ Now you the command `imgur-migrate` should be available. Note that it may take a
 
 **For Windows**
 
-I didn't create a binary for Windows, so you'll have to run the python file directly.
+I didn't create a binary for Windows, so you'll have to run the python file directly, or use WSL.
 
 ```
 pip3 install -r requirements.txt
