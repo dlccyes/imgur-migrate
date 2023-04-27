@@ -4,7 +4,7 @@ You can test `imgur-migrate` on this directory!
 
 This will be replaced
 
-![Image](https://i.imgur.com/xanvnkW.png)
+![tc or gtfo](https://i.imgur.com/xanvnkW.png)
 
 But not this 
 
