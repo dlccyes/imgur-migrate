@@ -36,7 +36,7 @@ git clone https://github.com/dlccyes/imgur-migrate
 sh install.sh
 ```
 
-See available commands
+See available commands (may take a while when running first time)
 
 ```
 imgur_migrate -h
@@ -58,6 +58,12 @@ Or run it against a specific file inside a directory
 
 ```
 imgur_migrate <path/to/your/directory> <filename>
+```
+
+You can tset it on the example directory in this repo.
+
+```
+imgur_migrate example
 ```
 
 ## Limitations
