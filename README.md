@@ -37,10 +37,25 @@ In `docs/System Design.md` for example, it will replace `![text](https://i.imgur
 
 ```
 git clone https://github.com/dlccyes/imgur-migrate
+```
+
+**For Linux or MacOS**
+
+```
 sh install.sh
 ```
 
 Now you the command `imgur-migrate` should be available. Note that it may take a while when running the first time.
+
+**For Windows**
+
+I didn't create a binary for Windows, so you'll have to run the python file directly.
+
+```
+pip3 install -r requirements.txt
+```
+
+Replace all the `imgur-migrate` commands below with `python3 imgur_migrate.py`.
 
 ### See usage 
 
