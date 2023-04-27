@@ -1,16 +1,18 @@
-import re
-import requests
-import os
+from re import findall, escape, sub
+from requests import get as r_get
+from os.path import join, exists
+from os import walk
 import sys
 
-def find_all_imgur_links(text: str) -> list[tuple[str, str]]:
+def find_all_imgur_links(text: str) -> list[tuple[str, str, str]]:
     """
-    Find all Imgur links in the file\n
+    Find all embedded Imgur links in the file like ![text]()\n
     Only match links that start with https://i.imgur.com/\n
-    Return a list of tuples, where each tuple is (https://i.imgur.com/<code>, .<extension>)
+    Return a list of tuples, where each tuple is ("<text>", "https://i.imgur.com/<code>", ".<extension>")
     """
-    imgur_pattern = r'(https:\/\/i\.imgur\.com\/\w+)(\.\w+)?'
-    imgur_links = re.findall(imgur_pattern, text)
+    imgur_pattern = r'!\[(.*?)\]\((https:\/\/i\.imgur\.com\/\w+)(\.\w+)?\)'
+
+    imgur_links = findall(imgur_pattern, text)
     return imgur_links
 
 def replace_external_url_link_with_internal_wiki_link(url: str, path: str, text: str) -> str:
@@ -20,22 +22,22 @@ def replace_external_url_link_with_internal_wiki_link(url: str, path: str, text:
     
     # match "![text](path)" and "![](path)"
     pattern = r"!\[([^\]]*)\]\((url)\)|!\[\]\((url)\)"
-    escaped_url = re.escape(url)
+    escaped_url = escape(url)
     pattern = pattern.replace("url", escaped_url)
-    replaced_text = re.sub(pattern, f"![[{path}]]", text)
+    replaced_text = sub(pattern, f"![[{path}]]", text)
     return replaced_text
 
 def dir_imgur_migrate(working_dir: str) -> None:
     """go over every file in the directory recursively"""
     print(f"About to process all .md files under {working_dir}")
-    for root, _, files in os.walk(working_dir):
+    for root, _, files in walk(working_dir):
         for file in files:
             if file.endswith(".md"):
                 file_imgur_migrate(root, file)
     print("All done!")
 
 def file_imgur_migrate(working_dir: str, file_name: str) -> None:
-    file_path = os.path.join(working_dir, file_name)
+    file_path = join(working_dir, file_name)
     print(f"Processing {file_path}...")
 
     with open(file_path, "r") as file:
@@ -49,21 +51,21 @@ def file_imgur_migrate(working_dir: str, file_name: str) -> None:
     # Download each image to the current directory
     print("Downloading images from imgur...")
     for i, link in enumerate(imgur_links):
-        link_base, link_ext = link
+        _, link_base, link_ext = link
         url = link_base + link_ext
-        response = requests.get(url)
+        response = r_get(url)
         
         # use a snake-case file name
         safe_file_name = file_name.replace('.md', '').lower().replace(' ', '-')
         ind = i + 1
         image_name = f'{safe_file_name}-{ind}{link_ext}'
-        image_path = os.path.join(working_dir, image_name)
+        image_path = join(working_dir, image_name)
         
         # check if the image already exists
-        while os.path.exists(image_path):
+        while exists(image_path):
             ind += 1
             image_name = f'{safe_file_name}-{ind}{link_ext}'
-            image_path = os.path.join(working_dir, image_name)
+            image_path = join(working_dir, image_name)
         replaced_text = replace_external_url_link_with_internal_wiki_link(url, image_name, text)
         
         # don't save image if no links are replaced
