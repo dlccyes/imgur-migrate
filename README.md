@@ -36,34 +36,34 @@ git clone https://github.com/dlccyes/imgur-migrate
 sh install.sh
 ```
 
-See available commands (may take a while when running first time)
+See usage (may take a while when running the first time)
 
 ```
-imgur_migrate -h
+imgur-migrate -h
 ```
 
 Run it against the current directory
 
 ```
-imgur_migrate
+imgur-migrate
 ```
 
 Or run it against a specific directory
 
 ```
-imgur_migrate <path/to/your/directory>
+imgur-migrate <path/to/your/directory>
 ```
 
 Or run it against a specific file inside a directory
 
 ```
-imgur_migrate <path/to/your/directory> <filename>
+imgur-migrate <path/to/your/directory> <filename>
 ```
 
-You can tset it on the example directory in this repo.
+You can test it on the example directory in this repo.
 
 ```
-imgur_migrate example
+imgur-migrate example
 ```
 
 ## Limitations
