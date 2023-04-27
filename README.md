@@ -1,6 +1,6 @@
 # Imgur Migrate
 
-According to Imgur's recent announcement, some images will be deleted from their platform after May 15, 2023. 
+According to Imgur's [recent announcement](https://help.imgur.com/hc/en-us/articles/14415587638029), some images will be deleted from their platform after May 15, 2023. 
 
 To avoid losing your images, you can use this tool to replace all Imgur links in your Markdown files with local images.
 
